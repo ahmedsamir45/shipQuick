@@ -90,3 +90,5 @@ dmypy.json
 # Secrets
 secrets.json
 credentials.json
+
+frontend/
