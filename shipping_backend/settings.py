@@ -201,7 +201,7 @@ SPECTACULAR_SETTINGS = {
 
 # CORS Configuration
 # Allow all origins if CORS_ALLOW_ALL_ORIGINS is True (only for development/testing)
-CORS_ALLOW_ALL_ORIGINS = os.getenv('CORS_ALLOW_ALL_ORIGINS', 'False') == 'True'
+CORS_ALLOW_ALL_ORIGINS=True
 
 if not CORS_ALLOW_ALL_ORIGINS:
     CORS_ALLOWED_ORIGINS = os.getenv(
