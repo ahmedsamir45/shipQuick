@@ -127,20 +127,16 @@ class UploadSessionViewSet(viewsets.ModelViewSet):
             parser = CSVParserService()
             result = parser.parse_csv_file(csv_file, session)
 
-            # Validate all addresses
-            logger.info(f"Validating addresses for session {session.id}")
-            validator = AddressValidatorService()
-
-            for shipment in session.shipments.all():
-                validator.validate_shipment_addresses(shipment)
-
-            # Assign shipping services
+            # Assign default shipping services (fast, no external calls)
             logger.info(f"Assigning shipping services for session {session.id}")
             calculator = ShippingCalculatorService()
 
             for shipment in session.shipments.all():
                 if not hasattr(shipment, 'shipping_service'):
                     calculator.assign_default_service(shipment)
+
+            # Note: Address validation is deferred to improve upload speed
+            # Addresses will be validated on-demand when viewing/editing shipments
 
             # Update session status
             session.status = UploadSessionStatus.IN_REVIEW
