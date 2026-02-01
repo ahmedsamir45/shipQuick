@@ -1,2 +1,2 @@
-web: gunicorn shipping_backend.wsgi:application --bind 0.0.0.0:$PORT --workers 4 --timeout 120
+web: gunicorn shipping_backend.wsgi:application --bind 0.0.0.0:$PORT --workers 4 --timeout 300
 release: python manage.py migrate --noinput && python manage.py collectstatic --noinput
